@@ -1,39 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
     <title>The Techno Blog</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
+<!-- Begin Body -->
 
-<body>
-    <div class="wrapper">
-        <header>
-            <h1>
-                <a href="/">The Techno Blog</a>
-            </h1>
-            <nav>
-                <a href='/'>Home</a>
-                {{#if loggedIn}}
-                <a href="/dashboard">Dashboard</a>
-                <button id="logout" class="btn-no-style">Logout</button>
-                {{else}}
-                <a href="/login">Login</a>
-                {{/if}}
-            </nav>
-        </header>
-        <main>
-            {{{ body }}}
-        </main>
-        <footer>
-            Thanks for visiting!
-        </footer>
-    </div>
-    {{#if loggedIn}}
-    <script src="/javascript/logout.js"></script>
-    {{/if}}
+<body class="bg-secondary">
+    <!-- Header with Nav and Logo -->
+    <header class="bg-dark">
+        <nav class="nav navbar-dark bg-dark ms-4 fs-4 ">
+            <a class="nav-link link-info" href="/">Home</a>
+            <a class="nav-link link-info" href="#">Dashboard</a>
+            <a class="nav-link link-info" href="/login">Login</a>
+            <a class="nav-link link-info" href="/sign">Sign Up</a>
+            <a id="logout" class="nav-link link-info" href="">Logout</a>
+        </nav>
+        <!-- Logo -->
+        <div class="bg-dark mb-5">
+            <button type="button"
+                class="btn btn-dark border border-info border-3 rounded-5 ms-5 my-3 fs-1 px-3 text-center">The Tech
+                Blog</button>
+        </div>
+    </header>
+    <!-- Dynamic Body Content Container -->
+    <section>
+        {{{body}}}
+    </section>
+
+
+
 </body>
-
+<script src="/javascript/logout.js"></script>
 </html>
