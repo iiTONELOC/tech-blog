@@ -93,7 +93,7 @@ router.get('/add-post', (req, res) => {
         res.redirect('/login')
     }
 
-    res.render('add-post');
+    res.render('add-post', {loggedIn:true});
 });
 
 module.exports = router;

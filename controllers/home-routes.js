@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User, Comment} = require('../models');
+const { Post, User, Comment } = require('../models');
 
 // get all posts for homepage
 router.get('/', (req, res) => {
@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
             'post_data',
             'title',
             'created_at',
-        
+
         ],
         include: [
             {
@@ -52,7 +52,7 @@ router.get('/post/:id', (req, res) => {
             'post_data',
             'title',
             'created_at',
-            
+
         ],
         include: [
             {
@@ -108,7 +108,7 @@ router.get('/sign', (req, res) => {
 
 router.get('/add-comment/:id', (req, res) => {
     let logged = req.session.loggedIn
-    if(!logged){
+    if (!logged) {
         res.redirect('/login')
     }
 
@@ -137,7 +137,6 @@ router.get('/add-comment/:id', (req, res) => {
         .then(dbPostData => {
             if (dbPostData) {
                 const post = dbPostData.get({ plain: true });
-                console.log(post)
                 res.render('add-comment', {
                     post,
                     loggedIn: true
@@ -151,5 +150,47 @@ router.get('/add-comment/:id', (req, res) => {
         });
 });
 
+router.get('/edit-comment/:id', (req, res) => {
+    let user = req.session.user_id
+    let logged = req.session.loggedIn
+    if (!logged) {
+        res.redirect('/login')
+    }
+
+    Comment.findByPk(req.params.id, {
+        attributes: [
+            'id',
+            'comment_text',
+            'post_id',
+            'user_id',
+            'created_at',
+        ],
+        include: [
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+    })
+        .then(dbPostData => {
+            if (dbPostData) {
+                const comment = dbPostData.get({ plain: true });
+                if (comment.user_id === user) {
+                    res.render('edit-comment', {
+                        comment,
+                        loggedIn: true
+                    });
+                } else {
+                    res.redirect(`/add-comment/${comment.post_id}`);                   
+                }
+
+            } else {
+                res.status(404).end();
+            }
+        })
+        .catch(err => {
+            res.status(500).json(err);
+        });
+});
 
 module.exports = router;

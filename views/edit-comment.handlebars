@@ -1,0 +1,35 @@
+<!-- Edit comment -->
+<div class="container-fluid border border-dark border-3 rounded-3 my-2 shadow" style="width: 80%;">
+    <div class="d-flex flex-wrap row justify-content-between bg-dark bg-gradient">
+        <div class="col-12 text-center text-light fs-3">
+            Edit Comment
+        </div>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center row bg-dark ">
+        <div class="col-sm-12 text-start text-light border border-info rounded-bottom my-2 fs-6 p-3 ps-1 bg-dark bg-gradient d-flex flex-wrap justify-content-center"
+            style="width: 98%;">
+            
+
+            <div class="input-group my-3" style="width: 98%; height: 5rem;">
+                <textarea id="post" class="form-control bg-dark text-info border-info" id="post-body"
+                    rows="3">{{comment.comment_text}}</textarea>
+            </div>
+
+            <div class="col-12 d-flex flex-wrap row justify-content-between">
+                <div class="col-lg-4 col-sm-12 ">
+                    <button type="button" id="update" class=" col-12 btn btn-dark btn-lg border-info my-2 text-center" data-user-id="{{comment.user_id}}"><span
+                            class="me-3 text-success fs-4">+</span>Update comment</button>
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                    <button type="button" id="delete" class=" col-12 btn btn-dark btn-lg border-danger my-2 text-center"><span
+                            class="me-3 text-danger fs-4">x</span>Delete comment</button>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<script src="/javascript/edit-comment.js"></script>
+{{!-- <script src="/javascript/delete-comment.js"></script> --}}
