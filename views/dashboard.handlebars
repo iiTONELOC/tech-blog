@@ -1,29 +1,26 @@
 <div class="container-fluid border border-dark border-3 rounded-3 my-2 p-2 shadow d-flex flex-wrap justify-content-center"
     style="width: 80%;">
-    <div class="col-12 d-flex flex-wrap row justify-content-end">
-        <div class="col-4 my-2">
-            <button type="button" class=" col-12 btn btn-dark btn-lg border-info "><span class="me-3 ">+</span>Add
+    <div class="col-12 d-flex flex-wrap row justify-content-center">
+        <div class="col-lg-6 col-sm-12 my-2">
+            <button type="button" id="add-post" class=" col-12 btn btn-dark btn-lg border-info "><span class="me-4 text-success fs-4">+</span>Add
                 Post</button>
         </div>
-
     </div>
 
 
-    {{#each posts}}
-<a href="/edit-post" class="text-decoration-none ms-1">
-    <span>
+{{#each posts}}
+    <a href="/dashboard/edit/{{this.id}}" class="text-decoration-none col-12 d-flex flex-wrap row justify-content-center">
     <div class="d-flex flex-wrap row justify-content-between bg-dark bg-gradient my-2 border border-2 rounded border-info"
         style="width: 98%;">
-        <div class="col-6 text-start text-white fs-3">
+        <div id="post-title" class="col-6 text-start text-white fs-3">
             {{this.title}}
         </div>
         <div class="col-6 text-end text-muted mt-3">
             {{this.created_at}}
         </div>
     </div>
-</span>
 </a>
-    {{/each}}
+{{/each}}
 </div>
 
-
+<script src="/javascript/dashboard.js"></script>

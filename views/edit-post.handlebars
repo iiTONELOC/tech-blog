@@ -11,8 +11,9 @@
             <div class="col-12">
                 Title:
             </div>
-            <div class="input-group my-3 " style="width: 98%;">
-                <input type="text" class="form-control bg-dark text-info border-info" aria-label="text-input">
+            <div  class="input-group my-3 " style="width: 98%;">
+                <textarea id="title" class="form-control bg-dark text-info border-info" id="title"
+                    rows="1">{{post.title}}</textarea>
             </div>
 
             <div class="col-12">
@@ -20,17 +21,18 @@
             </div>
 
             <div class="input-group my-3" style="width: 98%; height: 5rem;">
-                <input type="text-area" class="form-control bg-dark text-info border-info" aria-label="text-area">
+                <textarea id="post" class="form-control bg-dark text-info border-info" id="post-body"
+                    rows="3">{{post.post_data}}</textarea>
             </div>
 
             <div class="col-12 d-flex flex-wrap row justify-content-between">
-                <div class="col-4">
-                    <button type="button" class=" col-12 btn btn-dark btn-lg border-info my-2 text-center"><span
-                            class="me-3 ">+</span>Add Post</button>
+                <div class="col-lg-4 col-sm-12 ">
+                    <button type="button" id="update" class=" col-12 btn btn-dark btn-lg border-info my-2 text-center"><span
+                            class="me-3 text-success fs-4">+</span>Update Post</button>
                 </div>
-                <div class="col-4">
-                    <button type="button" class=" col-12 btn btn-dark btn-lg border-info my-2 text-center"><span
-                            class="me-3">-</span>Delete Post</button>
+                <div class="col-lg-4 col-sm-12">
+                    <button type="button" id="delete" class=" col-12 btn btn-dark btn-lg border-danger my-2 text-center"><span
+                            class="me-3 text-danger fs-4">x</span>Delete Post</button>
                 </div>
 
             </div>
@@ -39,4 +41,6 @@
         </div>
     </div>
 </div>
+<script src="/javascript/edit-post.js"></script>
+<script src="/javascript/delete-post.js"></script>
 <!-- End Edit Post-->

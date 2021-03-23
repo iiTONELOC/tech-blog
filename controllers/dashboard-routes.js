@@ -79,5 +79,13 @@ router.get('/edit/:id', (req, res) => {
         });
 });
 
+router.get('/add-post', (req, res) => {
+    // if (req.session.loggedIn) {
+    //     res.redirect('/');
+    //     return;
+    // }
+
+    res.render('add-post');
+});
 
 module.exports = router;
