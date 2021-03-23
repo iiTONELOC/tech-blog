@@ -97,13 +97,13 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
-router.get('/sign', (req, res) => {
+router.get('/sign-up', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
         return;
     }
 
-    res.render('sign');
+    res.render('sign-up');
 });
 
 router.get('/add-comment/:id', (req, res) => {

@@ -17,7 +17,7 @@ async function commentFormHandler(event) {
         });
 
         if (response.ok) {
-            document.location.replace(`/add-comment/${comment_id}`);
+            document.location.replace(`/`);
         } else {
             alert(response.statusText);
         }
