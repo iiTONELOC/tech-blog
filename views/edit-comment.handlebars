@@ -21,7 +21,7 @@
                             class="me-3 text-success fs-4">+</span>Update comment</button>
                 </div>
                 <div class="col-lg-4 col-sm-12">
-                    <button type="button" id="delete" class=" col-12 btn btn-dark btn-lg border-danger my-2 text-center"><span
+                    <button type="button" id="delete" class=" col-12 btn btn-dark btn-lg border-danger my-2 text-center"data-user-id="{{comment.user_id}}"><span
                             class="me-3 text-danger fs-4">x</span>Delete comment</button>
                 </div>
 
@@ -32,4 +32,4 @@
     </div>
 </div>
 <script src="/javascript/edit-comment.js"></script>
-{{!-- <script src="/javascript/delete-comment.js"></script> --}}
+<script src="/javascript/delete-comment.js"></script>

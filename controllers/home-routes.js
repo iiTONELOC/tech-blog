@@ -193,4 +193,62 @@ router.get('/edit-comment/:id', (req, res) => {
         });
 });
 
+router.get('/delete-comment/:id', (req, res) => {
+    let user = req.session.user_id
+    let logged = req.session.loggedIn
+    if (!logged) {
+        res.redirect('/login')
+    }
+
+    Comment.findByPk(req.params.id, {
+        attributes: [
+            'id',
+            'comment_text',
+            'post_id',
+            'user_id',
+            'created_at',
+        ],
+        include: [
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+    })
+        .then(dbPostData => {
+            if (dbPostData) {
+                const comment = dbPostData.get({ plain: true });
+                if (comment.user_id === user) {
+                    router.delete(`/deleteComment/:id`, withAuth, (req, res) => {
+                        (comment.id = req.params.id);
+                        Post.destroy({
+                            where: {
+                                id: req.params.id
+                            }
+                        })
+                            .then(dbPostData => {
+                                if (!dbPostData) {
+                                    res.status(404).json({ message: 'No post found with this id' });
+                                    return;
+                                }
+                                res.redirect(`/add-comment/${comment.post_id}`)(dbPostData);
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                res.status(500).json(err);
+                            });
+                    });
+                } else {
+                    res.redirect(`/add-comment/${comment.post_id}`);                   
+                }
+
+            } else {
+                res.status(404).end();
+            }
+        })
+        .catch(err => {
+            res.status(500).json(err);
+        });
+});
+
 module.exports = router;
