@@ -2,6 +2,10 @@ const router = require('express').Router();
 const { Post, User, Comment, } = require('../models');
 
 router.get('/', (req, res) => {
+    let logged = req.session.loggedIn
+    if(!logged){
+        res.redirect('/login')
+    }
     console.log(req.session);
     console.log('======================');
     Post.findAll({
@@ -40,6 +44,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/edit/:id', (req, res) => {
+    let logged = req.session.loggedIn
+    if(!logged){
+        res.redirect('/login')
+    }
     Post.findByPk(req.params.id, {
         attributes: [
             'id',
@@ -80,10 +88,10 @@ router.get('/edit/:id', (req, res) => {
 });
 
 router.get('/add-post', (req, res) => {
-    // if (req.session.loggedIn) {
-    //     res.redirect('/');
-    //     return;
-    // }
+    let logged = req.session.loggedIn
+    if(!logged){
+        res.redirect('/login')
+    }
 
     res.render('add-post');
 });

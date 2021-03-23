@@ -1,19 +1,53 @@
-<!-- Add Comment-->
-<div class="container-fluid border border-dark border-3 rounded-3 my-2 shadow" style="width: 80%;">
+{{> post-info post }}
+
+{{#if post.comments.length}}
+<div class="container-fluid border border-dark border-3 rounded-3 my-2 shadow" style="width: 70%;">
     <div class="d-flex flex-wrap row justify-content-between bg-dark ">
         <div class="col-12 text-center text-light  fs-3">
+            Comments
+        </div>
+    </div>
+    <!-- Add Comments Dynamically-->
+    {{#each post.comments}}
+    <div class="d-flex flex-wrap justify-content-center row bg-dark bg-gradient">
+        <a
+        href="/edit-comment/{{id}}"
+        class="text-decoration-none col-sm-12 text-start text-info border border-info rounded-bottom my-2 fs-6 p-3 bg-dark bg-gradient"
+            style="width: 99%;">
+            {{comment_text}}
+            <div class="col-sm-12 text-start text-muted border-top mt-1 border-dark p-1 font-monospace" style="font-size:smaller;">
+            {{user.username}} commented on this post on {{created_at}}
+            </div>
+        </a>
+    </div>
+    {{/each}}
+</div>
+{{/if}}
+<!-- End Comments-->
+<!-- Add Comment-->
+<div class="container-fluid border border-dark border-3 rounded-3 my-2 shadow" style="width: 70%;">
+    <div class="d-flex flex-wrap row justify-content-between bg-dark bg-gradient">
+        <div class="col-12 text-center text-light fs-3">
             Add Comment
         </div>
     </div>
-    <div class="d-flex flex-wrap justify-content-end row bg-dark bg-gradient pe-3">
-        <input type="text-area" class="form-control bg-dark bg-gradient text-info border-info mb-2 mt-3 text-center"
-            style="height: 10rem; width: 98%;" placeholder="Add a Comment" aria-label="text-input">
+    <div class="d-flex flex-wrap justify-content-center row bg-dark ">
+        <div class="col-sm-12 text-start text-light border border-info rounded-bottom my-2 fs-6 p-3 ps-1 bg-dark bg-gradient d-flex flex-wrap justify-content-end"
+            style="width: 98%;">
+            
+            <div class="input-group my-3 col-12 d-flex flex-wrap justify-content-center" style="width: 98%; height: 5rem;">
+                <textarea id="comment-body" class="form-control bg-dark text-info border-info" id="post-body"
+                    rows="3"></textarea>
+            </div>
 
-
-        <button type="button"
-            class="d-flex flex-wrap justify-content-center col-12 btn btn-dark btn-lg border-info mt-2 mb-3"
-            style="max-width: 26vw;">Post
-            Comment</button>
+            <div class="col-12 d-flex flex-wrap justify-content-center" style="width: 98%;">
+                <button type="button" id="post-comment"
+                class=" col-10 col-lg-4 btn btn-dark btn-lg border-info my-2"
+                ><span class="me-3 text-success">+</span>Add Comment</button>
+            </div>
+            
+        </div>
     </div>
 </div>
+<script src="/javascript/add-comment.js"></script>
 <!-- End Add Comment-->

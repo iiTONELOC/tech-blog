@@ -107,47 +107,48 @@ router.get('/sign', (req, res) => {
 });
 
 router.get('/add-comment/:id', (req, res) => {
-    res.render('add-comment', {
-        // post,
-        // loggedIn: true
-    });
-    // Post.findByPk(req.params.id, {
-    //     attributes: [
-    //         'id',
-    //         'post_data',
-    //         'title',
-    //         'created_at',
-    //     ],
-    //     include: [
-    //         {
-    //             model: Comment,
-    //             attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-    //             include: {
-    //                 model: User,
-    //                 attributes: ['username']
-    //             }
-    //         },
-    //         {
-    //             model: User,
-    //             attributes: ['username']
-    //         }
-    //     ]
-    // })
-    //     .then(dbPostData => {
-    //         if (dbPostData) {
-    //             const post = dbPostData.get({ plain: true });
+    let logged = req.session.loggedIn
+    if(!logged){
+        res.redirect('/login')
+    }
 
-    //             res.render('add-comment', {
-    //                 post,
-    //                 loggedIn: true
-    //             });
-    //         } else {
-    //             res.status(404).end();
-    //         }
-    //     })
-    //     .catch(err => {
-    //         res.status(500).json(err);
-    //     });
+    Post.findByPk(req.params.id, {
+        attributes: [
+            'id',
+            'post_data',
+            'title',
+            'created_at',
+        ],
+        include: [
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+    })
+        .then(dbPostData => {
+            if (dbPostData) {
+                const post = dbPostData.get({ plain: true });
+                console.log(post)
+                res.render('add-comment', {
+                    post,
+                    loggedIn: true
+                });
+            } else {
+                res.status(404).end();
+            }
+        })
+        .catch(err => {
+            res.status(500).json(err);
+        });
 });
 
 
