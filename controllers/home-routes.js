@@ -181,7 +181,7 @@ router.get('/edit-comment/:id', (req, res) => {
                         loggedIn: true
                     });
                 } else {
-                    res.redirect(`/view-comment/${comment.post_id}`);                   
+                    res.redirect(`/view-comment/${comment.post_id}`);
                 }
 
             } else {

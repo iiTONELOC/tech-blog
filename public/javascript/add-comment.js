@@ -24,6 +24,9 @@ async function commentFormHandler(event) {
         } else {
             alert(response.statusText);
         }
+    }else{
+        document.getElementById('blank-field-alert').setAttribute('style','visibility: visible;');     
+        
     }
 }
 

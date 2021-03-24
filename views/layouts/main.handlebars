@@ -14,7 +14,7 @@
 </head>
 <!-- Begin Body -->
 
-<body class="bg-secondary">
+<body class="bg-secondary font-monospace">
     <!-- Header with Nav and Logo -->
     <header class="bg-dark">
         <nav class="nav navbar-dark bg-dark ms-4 fs-4 ">
@@ -39,7 +39,17 @@
     </header>
     <!-- Dynamic Body Content Container -->
     <section>
+        <div class="col-12 d-flex justify-content-center">
+            <div id="blank-field-alert" class="alert alert-dark bg-dark text-danger col-4 d-flex justify-content-center border-info shadow"
+            role="alert" style="visibility:hidden">
+
+            Fields cannot be blank!
+        </div>
+
+        </div>
+        
         {{{body}}}
+
     </section>
 
 
@@ -48,4 +58,5 @@
 {{#if loggedIn}}
 <script src="/javascript/logout.js"></script>
 {{/if}}
+
 </html>
