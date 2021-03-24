@@ -11,6 +11,7 @@
     {{#each post.comments}}
     <div class="d-flex flex-wrap justify-content-center row bg-dark bg-gradient">
         <a
+        data-post="{{post_id}}"
         href="/edit-comment/{{id}}"
         class="text-decoration-none col-sm-12 text-start text-info border border-info rounded-bottom my-2 fs-6 p-3 bg-dark bg-gradient"
             style="width: 99%;">

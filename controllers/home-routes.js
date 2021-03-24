@@ -106,7 +106,7 @@ router.get('/sign-up', (req, res) => {
     res.render('sign-up');
 });
 
-router.get('/add-comment/:id', (req, res) => {
+router.get('/view-comment/:id', (req, res) => {
     let logged = req.session.loggedIn
     if (!logged) {
         res.redirect('/login')
@@ -137,7 +137,7 @@ router.get('/add-comment/:id', (req, res) => {
         .then(dbPostData => {
             if (dbPostData) {
                 const post = dbPostData.get({ plain: true });
-                res.render('add-comment', {
+                res.render('view-comment', {
                     post,
                     loggedIn: true
                 });

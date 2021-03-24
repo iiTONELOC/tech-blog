@@ -2,6 +2,7 @@
 
 async function commentFormHandler(event) {
     event.preventDefault();
+    const post_id = document.querySelector('#delete').getAttribute('data-post')
     const user_id = document.getElementById('delete').getAttribute('data-user-id')
     const comment_id = window.location.toString().split('/')[
         window.location.toString().split('/').length - 1
@@ -17,7 +18,7 @@ async function commentFormHandler(event) {
         });
 
         if (response.ok) {
-            document.location.replace(`/`);
+            document.location.replace(`/view-comment/${post_id}`);
         } else {
             alert(response.statusText);
         }

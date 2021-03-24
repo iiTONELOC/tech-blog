@@ -2,6 +2,7 @@
 
 async function commentFormHandler(event) {
     event.preventDefault();
+    const post_id = document.querySelector('#update').getAttribute('data-post')
     const comment_text = document.querySelector('#post').value.trim();
     const user_id = document.getElementById('update').getAttribute('data-user-id')
     const comment_id = window.location.toString().split('/')[
@@ -23,7 +24,7 @@ async function commentFormHandler(event) {
         });
 
         if (response.ok) {
-            document.location.replace(`/`);
+            document.location.replace(`/view-comment/${post_id}`);
         } else {
             alert(response.statusText);
         }
