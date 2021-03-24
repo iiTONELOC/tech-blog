@@ -154,7 +154,7 @@ router.get('/edit-comment/:id', (req, res) => {
     let user = req.session.user_id
     let logged = req.session.loggedIn
     if (!logged) {
-        res.redirect('/login')
+        window.location.reload()
     }
 
     Comment.findByPk(req.params.id, {
@@ -181,7 +181,7 @@ router.get('/edit-comment/:id', (req, res) => {
                         loggedIn: true
                     });
                 } else {
-                    res.redirect(`/add-comment/${comment.post_id}`);                   
+                    res.redirect(`/view-comment/${comment.post_id}`);                   
                 }
 
             } else {
