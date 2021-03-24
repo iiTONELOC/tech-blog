@@ -20,8 +20,8 @@ The Tech Blog is a simple blogging website.
 # Technology 
 | Technology | Description                        |Links ↘️ |
 | ---------- | -----------------------------------| ------|  
-| ![JavaScript](https://shields.io/static/v1?label=JavaScript&message=64.7%&color=yellow&style=flat-square) | JavaScript | []() |
-| ![Handlebars](https://shields.io/static/v1?label=Handlebars&message=35.3%&color=orange&style=flat-square) | Simple HTML templating language. | [Handlebars](https://handlebarsjs.com/guide/#what-is-handlebars) |
+| ![JavaScript](https://shields.io/static/v1?label=JavaScript&message=67.4%&color=yellow&style=flat-square) | JavaScript | []() |
+| ![Handlebars](https://shields.io/static/v1?label=Handlebars&message=32.6%&color=orange&style=flat-square) | Simple HTML templating language. | [Handlebars](https://handlebarsjs.com/guide/#what-is-handlebars) |
 
 # Features
 This project features express-handlebars and node.js
