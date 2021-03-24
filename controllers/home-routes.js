@@ -198,6 +198,7 @@ router.get('/delete-comment/:id', (req, res) => {
     let logged = req.session.loggedIn
     if (!logged) {
         // res.redirect('/login')
+        res.end()
         window.location.replace('/login')
     }
 
