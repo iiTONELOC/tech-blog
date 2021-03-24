@@ -197,7 +197,8 @@ router.get('/delete-comment/:id', (req, res) => {
     let user = req.session.user_id
     let logged = req.session.loggedIn
     if (!logged) {
-        res.redirect('/login')
+        // res.redirect('/login')
+        window.location.replace('/login')
     }
 
     Comment.findByPk(req.params.id, {
@@ -239,7 +240,7 @@ router.get('/delete-comment/:id', (req, res) => {
                             });
                     });
                 } else {
-                    res.redirect(`/add-comment/${comment.post_id}`);                   
+                    res.redirect(`/add-comment/${comment.post_id}`).end();                   
                 }
 
             } else {
