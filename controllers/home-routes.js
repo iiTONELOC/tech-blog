@@ -200,23 +200,22 @@ router.get('/delete-comment/:id', (req, res) => {
         // res.redirect('/login')
         res.end()
         window.location.replace('/login')
-    }
-
-    Comment.findByPk(req.params.id, {
-        attributes: [
-            'id',
-            'comment_text',
-            'post_id',
-            'user_id',
-            'created_at',
-        ],
-        include: [
-            {
-                model: User,
-                attributes: ['username']
-            }
-        ]
-    })
+    } else {
+        Comment.findByPk(req.params.id, {
+            attributes: [
+                'id',
+                'comment_text',
+                'post_id',
+                'user_id',
+                'created_at',
+            ],
+            include: [
+                {
+                    model: User,
+                    attributes: ['username']
+                }
+            ]
+        })
         .then(dbPostData => {
             if (dbPostData) {
                 const comment = dbPostData.get({ plain: true });
@@ -241,7 +240,7 @@ router.get('/delete-comment/:id', (req, res) => {
                             });
                     });
                 } else {
-                    res.redirect(`/add-comment/${comment.post_id}`).end();                   
+                    res.redirect(`/add-comment/${comment.post_id}`).end();
                 }
 
             } else {
@@ -251,6 +250,9 @@ router.get('/delete-comment/:id', (req, res) => {
         .catch(err => {
             res.status(500).json(err);
         });
+    }
+
+
 });
 
 module.exports = router;
