@@ -20,7 +20,7 @@ async function commentFormHandler(event) {
         });
 
         if (response.ok) {
-            document.location.replace('/');
+            document.location.replace(`/view-comment/${post_id}`);
         } else {
             alert(response.statusText);
         }
