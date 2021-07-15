@@ -4,6 +4,8 @@ const sequelize = require('./config/connection');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const hbs = exphbs.create({});
+const https = require('https');
+const fs = require('fs')
 //IMPORT SESSIONS
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -31,7 +33,16 @@ app.use(session(sess));
 // turn on routes
 app.use(routes);
 
-// turn on connection to db and server
-sequelize.sync({ force: false }).then(() => {
+
+const key = fs.readFileSync('./key.pem', 'utf8');
+const cert = fs.readFileSync('./server.crt', 'utf8');
+
+process.env.TEST ? sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
-});
+}) : sequelize.sync({ force: false }).then(() => {
+    const server = https.createServer({ key: key, cert: cert }, app);
+    server.listen(PORT, () => console.log(`Now listening on ${PORT}`))
+})
+
+
+

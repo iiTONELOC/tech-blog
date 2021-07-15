@@ -3,7 +3,7 @@ const { Post, User, Comment, } = require('../models');
 
 router.get('/', (req, res) => {
     let logged = req.session.loggedIn
-    if(!logged){
+    if (!logged) {
         res.redirect('/login')
     }
     console.log(req.session);
@@ -45,7 +45,7 @@ router.get('/', (req, res) => {
 
 router.get('/edit/:id', (req, res) => {
     let logged = req.session.loggedIn
-    if(!logged){
+    if (!logged) {
         res.redirect('/login')
     }
     Post.findByPk(req.params.id, {
@@ -89,11 +89,11 @@ router.get('/edit/:id', (req, res) => {
 
 router.get('/add-post', (req, res) => {
     let logged = req.session.loggedIn
-    if(!logged){
+    if (!logged) {
         res.redirect('/login')
     }
 
-    res.render('add-post', {loggedIn:true});
+    res.render('add-post', { loggedIn: true });
 });
 
 module.exports = router;
