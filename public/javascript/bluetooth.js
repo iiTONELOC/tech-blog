@@ -5,11 +5,21 @@ searchDevicesBtn.addEventListener('click', function (event) {
 
     function checkAvailability() {
         navigator.bluetooth.getAvailability().then(isAvailable => {
-            isAvailable ? alert(isAvailable, 'BT-Searching'):alert('Not Available!')
+            return isAvailable
         });
     }
 
-    checkAvailability();
+    const isAvail = checkAvailability();
+
+    isAvail ? navigator.bluetooth.requestDevice({
+        acceptAllDevices: true,
+        optionalServices: ['battery_service'] // Required to access service later.
+    })
+        .then(device => {
+            console.log(device);
+            window.alert('Success')
+        })
+        .catch(error => { console.error(error); }) : window.alert('Sorry bluetooth is not available on this browser!')
 
     // navigator.permissions.query({ name: "bluetooth" }).then(status => {
     //     if (status.state !== 'denied') checkAvailability();
