@@ -103,7 +103,12 @@ dist
 # TernJS port file
 .tern-port
 
+<<<<<<< HEAD
 DS_Store
 
 .vscode
 
+=======
+csr.pem
+key.pem
+>>>>>>> e42ccc7b3765825ba53e8fac4d782482cf185c02
