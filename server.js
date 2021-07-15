@@ -34,14 +34,18 @@ app.use(session(sess));
 app.use(routes);
 
 
-const key = fs.readFileSync('./key.pem', 'utf8');
-const cert = fs.readFileSync('./server.crt', 'utf8');
+// const key = fs.readFileSync('./key.pem', 'utf8');
+// const cert = fs.readFileSync('./server.crt', 'utf8');
 
-process.env.TEST ? sequelize.sync({ force: false }).then(() => {
+// process.env.TEST ? sequelize.sync({ force: false }).then(() => {
+//     app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
+// }) : sequelize.sync({ force: false }).then(() => {
+//     const server = https.createServer({ key: key, cert: cert }, app);
+//     server.listen(PORT, () => console.log(`Now listening on ${PORT}`))
+// })
+
+sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
-}) : sequelize.sync({ force: false }).then(() => {
-    const server = https.createServer({ key: key, cert: cert }, app);
-    server.listen(PORT, () => console.log(`Now listening on ${PORT}`))
 })
 
 
