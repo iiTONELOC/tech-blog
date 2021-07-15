@@ -3,12 +3,9 @@ const routes = require('./controllers/');
 const sequelize = require('./config/connection');
 const path = require('path');
 const exphbs = require('express-handlebars');
-<<<<<<< HEAD
-=======
 const hbs = exphbs.create({});
 const https = require('https');
 const fs = require('fs')
->>>>>>> e42ccc7b3765825ba53e8fac4d782482cf185c02
 //IMPORT SESSIONS
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
