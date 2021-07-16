@@ -133,6 +133,54 @@ router.post('/logout', (req, res) => {
     }
 });
 
+
+
+router.put('/updateLocation', async (req, res) => {
+    if (req.session.user_id == undefined) {
+        return
+    }
+    console.log('USER +++++++++++++++++++++++++', req.session.user_id)
+    const { latitude, longitude, } = { ...req.body }
+    const latData = async () => {
+        if (latitude == undefined) {
+            const { lat } = await Location.user(req);
+            return lat
+        } else {
+            return latitude
+        }
+    };
+    const lonData = async () => {
+        if (longitude == undefined) {
+            const { lon } = await Location.user(req);
+            return lon
+        } else {
+            return longitude
+        }
+    };
+
+    console.log(`++++LAT LON+++++++`)
+    const lat = await latData();
+    const lon = await lonData();
+    console.log(lat, lon)
+    User.update({ latitude: lat, longitude: lon }, {
+        where: {
+            id: req.session.user_id
+        }
+    })
+        .then(async dbUserData => {
+            if (!dbUserData) {
+                res.status(404).json({ message: 'No user found with this id' });
+                return;
+            }
+            console.log(dbUserData)
+            res.json(dbUserData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+    console.log('USER +++++++++++++++++++++++++')
+});
 router.put('/:id', (req, res) => {
     // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
 
@@ -155,45 +203,6 @@ router.put('/:id', (req, res) => {
             res.status(500).json(err);
         });
 });
-
-router.put('/:id/lc', (req, res) => {
-    const { latitude, longitude, } = { ...req.body }
-    const latData = async () => {
-        if (latitude == undefined) {
-            const { lat } = await Location.user(req);
-            return { latitude: lat }
-        } else {
-            return { latitude: latitude }
-        }
-    };
-    const lonData = async () => {
-        if (longitude == undefined) {
-            const { lon } = await Location.user(req);
-            return { longitude: lon }
-        } else {
-            return { longitude: longitude }
-        }
-    };
-
-    User.update(latData, lonData, {
-        individualHooks: true,
-        where: {
-            id: req.params.id
-        }
-    })
-        .then(dbUserData => {
-            if (!dbUserData) {
-                res.status(404).json({ message: 'No user found with this id' });
-                return;
-            }
-            res.json(dbUserData);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-});
-
 router.delete('/:id', (req, res) => {
     User.destroy({
         where: {
