@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
-
+const Location = require('../../utils/Location')
 
 // get all users
 router.get('/', (req, res) => {
@@ -33,7 +33,7 @@ router.get('/:id', (req, res) => {
                     attributes: ['title']
                 }
             },
-            
+
         ]
     })
         .then(dbUserData => {
@@ -49,15 +49,36 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/', (req, res) => {
-    // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
+router.post('/', async (req, res) => {
+    const { latitude, longitude, username, email, password } = { ...req.body }
+    const latData = async () => {
+        if (latitude == undefined) {
+            const { lat } = await Location.user(req);
+            return lat
+        } else {
+            return latitude
+        }
+    };
+    const lonData = async () => {
+        if (longitude == undefined) {
+            const { lon } = await Location.user(req);
+            return lon
+        } else {
+            return longitude
+        }
+    };
+
+    const lat = await latData();
+    const lon = await lonData();
     User.create({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password
+        username: username,
+        email: email,
+        password: password,
+        latitude: lat,
+        longitude: lon,
     })
         .then(dbUserData => {
-            
+
             req.session.save(() => {
                 req.session.user_id = dbUserData.id;
                 req.session.username = dbUserData.username;
@@ -90,7 +111,7 @@ router.post('/login', (req, res) => {
             res.status(400).json({ message: 'Incorrect password!' });
             return;
         }
-        
+
         req.session.save(() => {
             req.session.user_id = dbUserData.id;
             req.session.username = dbUserData.username;
@@ -117,6 +138,44 @@ router.put('/:id', (req, res) => {
 
     // pass in req.body instead to only update what's passed through
     User.update(req.body, {
+        individualHooks: true,
+        where: {
+            id: req.params.id
+        }
+    })
+        .then(dbUserData => {
+            if (!dbUserData) {
+                res.status(404).json({ message: 'No user found with this id' });
+                return;
+            }
+            res.json(dbUserData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
+router.put('/:id/lc', (req, res) => {
+    const { latitude, longitude, } = { ...req.body }
+    const latData = async () => {
+        if (latitude == undefined) {
+            const { lat } = await Location.user(req);
+            return { latitude: lat }
+        } else {
+            return { latitude: latitude }
+        }
+    };
+    const lonData = async () => {
+        if (longitude == undefined) {
+            const { lon } = await Location.user(req);
+            return { longitude: lon }
+        } else {
+            return { longitude: longitude }
+        }
+    };
+
+    User.update(latData, lonData, {
         individualHooks: true,
         where: {
             id: req.params.id

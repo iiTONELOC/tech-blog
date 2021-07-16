@@ -39,7 +39,7 @@ app.use(function (req, res) {
 
 
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
+    app.listen(PORT, () => console.log(`Now listening on ${PORT}\n\rhttp://localhost:${PORT}`));
 })
 
 
