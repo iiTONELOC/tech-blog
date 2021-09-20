@@ -9,12 +9,12 @@
 The Tech Blog is a simple blogging website.
 
 # Table of Contents
-*[Technology](#technology)  
-*[Features](#features)  
-*[Installation](#installation)  
-*[Usage](#usage)   
-*[Questions](#questions)  
-*[License](#license)
+* [Technology](#technology)  
+* [Features](#features)  
+* [Installation](#installation)  
+* [Usage](#usage)   
+* [Questions](#questions)  
+* [License](#license)
 
 
 # Technology 
@@ -28,7 +28,7 @@ This project features express-handlebars and node.js
 
 # Installation  
 Project Repository: [The Tech Blog](https://github.com/iiTONELOC/tech-blog)  
-If you wish you install the repo for testing or to simply modify and make it your own, click on the link above to clone. Navigate to the root of the cloned repo and type: ```npm install``, be sure to edit the included .env file with your own credentials. 
+If you wish you install the repo for testing or to simply modify and make it your own, click on the link above to clone. Navigate to the root of the cloned repo and type: ```npm install```, be sure to edit the included .env file with your own credentials. 
 
 # Usage
 [The Tech Blog](https://the-techno-blogger.herokuapp.com/)  
